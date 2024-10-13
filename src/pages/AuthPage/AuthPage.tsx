@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Clock from "../../components/Clock";
 import SingInForm from "../../components/SingInForm";
 import SingUpForm from "../../components/SingUpForm";
 import HeaderLogin from "../../components/HeaderLogIn";
 import { useLocation } from "react-router-dom"; // Para verificar a rota atual
+import { Context } from "../../contexts/Context";
+import AlerSucess from "../../components/Alerts/AlerSucess";
 
 const AuthPage = () => {
   const [showForm, setShowForm] = useState(false); // Controle da exibição do formulário após o tempo
   const location = useLocation(); // Obtém a rota atual
+  const { showChecked } = useContext(Context);
 
   // Adiciona o atraso para exibir o formulário
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowForm(true); // Exibe o formulário após o tempo
-    }, 300); // 3 segundos de atraso
+    }, 300); // 300 milissegundos de atraso
 
     return () => clearTimeout(timer); // Limpa o timer quando o componente for desmontado
   }, []);
@@ -29,12 +32,11 @@ const AuthPage = () => {
   };
 
   return (
-    <section className="min-h-screen w-full  bg-zinc-800 flex flex-col justify-center items-center overflow-hidden">
+    <section className="min-h-screen w-full bg-zinc-800 flex flex-col justify-center items-center overflow-hidden">
       <div className="h-12">
         <HeaderLogin />
       </div>
-      <div className="h-full w-full flex flex-col lg:flex-row justify-end items-center ">
-        {/* Relógio centralizado */}
+      <div className="h-full w-full flex flex-col lg:flex-row justify-end items-center">
         <div
           className={`lg:w-1/2 w-full flex items-center justify-center transition-transform duration-1000 ease-in-out transform ${
             showForm
@@ -45,15 +47,14 @@ const AuthPage = () => {
           <Clock />
         </div>
 
-        {/* Formulário com animação, dentro do fluxo do layout */}
         <div
           className={`w-1/2 flex items-center justify-center transition-transform duration-1000 ease-in-out transform ${
             showForm
               ? "lg:translate-x-0 lg:w-1/2 w-full"
               : "lg:translate-x-[100rem] translate-y-[100rem] lg:translate-y-0"
-          } `}
+          }`}
         >
-          {renderForm()}
+          {showChecked ? <AlerSucess /> : renderForm()}
         </div>
       </div>
     </section>

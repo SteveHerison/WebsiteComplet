@@ -1,11 +1,11 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import Checked from "../../assets/lot404.json";
-import { useEffect, useState } from "react";
+import Checked from "../../assets/checked.json";
+import React, { useEffect, useState } from "react";
 
-const Notfound = () => {
-  const fullMessage = "Pagina não encontrada!";
+const AlerSucess = () => {
+  const fullMessage = "Login realizado com sucesso!";
   const [displayedMessage, setDisplayedMessage] = useState("");
-  const typingSpeed = 50; // Tempo em milissegundos entre cada letra
+  const typingSpeed = 30; // Tempo em milissegundos entre cada letra
 
   useEffect(() => {
     let index = 0;
@@ -23,7 +23,7 @@ const Notfound = () => {
   }, [fullMessage]);
 
   return (
-    <div className="flex flex-col justify-center items-center h-full gap-5 bg-black">
+    <div className="flex flex-col justify-center items-center h-full gap-5">
       <Player
         autoplay
         loop
@@ -35,4 +35,4 @@ const Notfound = () => {
   );
 };
 
-export default Notfound;
+export default AlerSucess;

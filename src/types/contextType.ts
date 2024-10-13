@@ -1,6 +1,7 @@
 // src/types/contextType.ts
 export type ContextType = {
   showBar: boolean;
+  showChecked: boolean;
   setShowbar: (value: boolean) => void;
   name: string;
   setName: (name: string) => void;
@@ -12,4 +13,6 @@ export type ContextType = {
   setConfrmPassword: (confrmPassword: string) => void;
   isAuthenticated: boolean;
   authenticate: (inputName: string, inputPassword: string) => void;
+  logout: () => void;
+  setShowChecked: (showChecked: boolean) => void;
 };

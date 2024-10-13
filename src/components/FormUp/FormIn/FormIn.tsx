@@ -8,8 +8,13 @@ const FormIn = () => {
   const [inputPassword, setInputPassword] = useState(""); // Estado para a senha
   const [loginAttempted, setLoginAttempted] = useState(false);
   const navigate = useNavigate();
-  const { setName, setPassword, authenticate, isAuthenticated } =
-    useContext(Context);
+  const {
+    setName,
+    setPassword,
+    authenticate,
+    isAuthenticated,
+    setShowChecked,
+  } = useContext(Context);
 
   const handleInputName = (value: string) => {
     setInputName(value);
@@ -28,11 +33,17 @@ const FormIn = () => {
   // useEffect para verificar a autenticação e redirecionar
   useEffect(() => {
     if (isAuthenticated && loginAttempted) {
+      setShowChecked(true); // Mostra o alerta de sucesso
       setName(inputName);
       setPassword(inputPassword);
       setInputName("");
       setInputPassword("");
-      navigate("/home");
+
+      // Configura um temporizador para ocultar o alerta e navegar para a home
+      setTimeout(() => {
+        setShowChecked(false); // Oculta o alerta
+        navigate("/home");
+      }, 2000);
     } else if (!isAuthenticated && loginAttempted) {
       alert("A senha ou o nome estão incorretos");
       setLoginAttempted(false);
@@ -45,6 +56,7 @@ const FormIn = () => {
     setName,
     setPassword,
     loginAttempted,
+    setShowChecked, // Inclua setShowChecked aqui
   ]);
 
   return (

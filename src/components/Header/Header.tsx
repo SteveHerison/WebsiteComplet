@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import Menu from "../../assets/menu.svg";
+import Logout from "../../assets/logout.svg";
 import { Context } from "../../contexts/Context";
 import { getFirstTwoNames } from "../../utils/helpers";
 
 const Header = () => {
-  const { showBar, setShowbar, name } = useContext(Context);
+  const { showBar, setShowbar, name, logout } = useContext(Context);
 
   const handleShowBar = () => {
     setShowbar(!showBar);
@@ -19,6 +20,9 @@ const Header = () => {
           <p>alert</p>
           <button onClick={handleShowBar}>
             <img src={Menu} alt="menu icon" className="w-8 h-8" />
+          </button>
+          <button onClick={logout}>
+            <img src={Logout} alt="menu icon" className="w-8 h-8" />
           </button>
         </div>
       </div>
